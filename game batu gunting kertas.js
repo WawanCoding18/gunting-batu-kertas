@@ -27,7 +27,7 @@ function getHasil(computer, player){
  const scoreBot = document.querySelector('.scoreBot')
  const musicTrue = document.getElementById('sound');
  const musicFalse = document.getElementById('sound1');
- 
+ const vs = document.querySelector('.VS')
  
 // Inisialisasi skor awal
 let skor = 0;
@@ -72,6 +72,7 @@ function endGame(winner){
     point = 0
     score.innerHTML = 0
     scoreBot.innerHTML = 0
+    vs.innerHTML = '';
 }
 
 //tanda ? = true dan tanda : = false
@@ -106,9 +107,7 @@ choose.forEach(function(pilihan){
         const pilihanComputer = getpilihanComputer()
         const pilihanPlayer = pilihan.className;
         const hasil = getHasil(pilihanComputer, pilihanPlayer)
-        const vs = document.querySelector('.VS')
 
-        
         //fucntion buat putar2 saat komputer proses suit
         rotate();
         
