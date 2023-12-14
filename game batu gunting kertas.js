@@ -20,8 +20,64 @@ function getHasil(computer, player){
     if (player == 'kertas') return (computer == 'batu') ? 'WIN!' : 'LOSE!';
      
 }
+
+//pengaturan score
+ //score
+ const score = document.querySelector('.score')
+ const scoreBot = document.querySelector('.scoreBot')
+ const musicTrue = document.getElementById('sound');
+ const musicFalse = document.getElementById('sound1');
+ 
+ 
+// Inisialisasi skor awal
+let skor = 0;
+const maxSkor = 10;
+
+//nambah point jika player win
+function getScore() {
+  // Tambahkan satu ke skor
+  const maxScore = [ 0,1,2,3,4,5,6,7,8,9,10]
+  skor += 0;
+  // Tampilkan skor baru
+ score.innerHTML = maxScore[skor += 1]
+ musicTrue.currentTime= 0
+ musicTrue.play()
+ if(skor == maxSkor){
+     endGame('Player!')
+ }
+ 
+}
+
+
+// Inisialisasi skor awal
+let point = 0;
+const maxPoin = 10;
+
+//nambah point jika Ai win
+function getScoreComputer() {
+    const maxPoint = [0,1,2,3,4,5,6,7,8,9,10]
+    point += 0;
+    scoreBot.innerHTML = maxPoint[point +=1] 
+    musicFalse.currentTime= 0
+    musicFalse.play()
+   if(point == maxPoin){
+    endGame('Computer!')
+   }
+}
+
+//Jika game selesai ampe poin 10 maka akan ke reset dari awal kabeh!
+function endGame(winner){
+    alert(`Pemenangnya adalah ${winner}`)
+    skor = 0
+    point = 0
+    score.innerHTML = 0
+    scoreBot.innerHTML = 0
+}
+
 //tanda ? = true dan tanda : = false
 
+
+//untuk saat pemilihan Ai nya puter2 biar makin unik
 function rotate(){
     const imgComputer = document.querySelector('.computer')
     const image = ['batu','gunting', 'kertas']
@@ -41,10 +97,10 @@ function rotate(){
     }, 100)
 }
 
-
+//pengulangan untuk pilihan img gunting batu kertas
 const choose = document.querySelectorAll('li img')
 console.log(choose)
-//pengulangan untuk pilihan img gunting batu kertas
+
 choose.forEach(function(pilihan){
     pilihan.addEventListener('click', function(){
         const pilihanComputer = getpilihanComputer()
@@ -52,9 +108,11 @@ choose.forEach(function(pilihan){
         const hasil = getHasil(pilihanComputer, pilihanPlayer)
         const vs = document.querySelector('.VS')
 
+        
         //fucntion buat putar2 saat komputer proses suit
         rotate();
-
+        
+        //untuk biar keluarn baru skor dan text kata2 win/lose/serinya setelah Ai nya selesai putar2 milih yang mana
         setTimeout(function(){
             const imgComputer = document.querySelector('.computer')
         
@@ -63,32 +121,22 @@ choose.forEach(function(pilihan){
        
             //menampikan tulisan hasil 
        vs.innerHTML = hasil 
-        }, 1000)
 
+      //menampilkan score jika player menang
+      if(hasil.includes('WIN'))
+       getScore();
+
+     
+      //menampilkan score jika komputer menang
+      if(hasil.includes('LOSE'))
+       getScoreComputer();
+
+        }, 1000)
       
     })
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// 1000 sama aja 1 detik!
 
 
 
