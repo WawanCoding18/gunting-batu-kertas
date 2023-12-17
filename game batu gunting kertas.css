@@ -143,6 +143,10 @@ li img{
     font-weight: 600;
 }
 
+.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
 
 
 @media only screen and (max-width: 600px) {

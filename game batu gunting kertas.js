@@ -79,12 +79,12 @@ function endGame(winner){
 
 
 //untuk saat pemilihan Ai nya puter2 biar makin unik
-function rotate(){
+function rotate(pilihan){
     const imgComputer = document.querySelector('.computer')
     const image = ['batu','gunting', 'kertas']
     let i = 0
     const waktuStart = new Date().getTime()
-
+    
     // setInterval untuk fungsi melakukan sesuatu selama berulang2 sesuai ketentuan waktu
     setInterval(function(){
        if(new Date().getTime() - waktuStart > 1000 ){
@@ -96,6 +96,22 @@ function rotate(){
        if(i == image.length) i = 0
 
     }, 100)
+}
+
+function jeda(){
+    const gunting = document.querySelector('.gunting')
+    const batu = document.querySelector('.batu')
+    const kertas = document.querySelector('.kertas')
+
+    gunting.classList.add('disabled')
+    batu.classList.add('disabled')
+    kertas.classList.add('disabled')
+
+    setTimeout(function(){
+        gunting.classList.remove('disabled')
+        batu.classList.remove('disabled')
+        kertas.classList.remove('disabled')
+    }, 2000)
 }
 
 //pengulangan untuk pilihan img gunting batu kertas
@@ -110,14 +126,16 @@ choose.forEach(function(pilihan){
 
         //fucntion buat putar2 saat komputer proses suit
         rotate();
+        jeda();
         
         //untuk biar keluarn baru skor dan text kata2 win/lose/serinya setelah Ai nya selesai putar2 milih yang mana
         setTimeout(function(){
             const imgComputer = document.querySelector('.computer')
+       
         
             //biar komputernya bisa berubah2 gambar sesuai AI nya
        imgComputer.setAttribute('src', 'myImage/' + pilihanComputer + '.png')
-       
+ 
             //menampikan tulisan hasil 
        vs.innerHTML = hasil 
 
@@ -131,7 +149,6 @@ choose.forEach(function(pilihan){
        getScoreComputer();
 
         }, 1000)
-      
     })
 })
 
